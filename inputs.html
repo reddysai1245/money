@@ -39,7 +39,7 @@
                      </div>
                      <div class="form-group">
                          <label for="timee">time</label>
-                         <input type="text" class="form-control time" name="Time" id="demo" onclick="fnc();">
+                         <input type="text" class="form-control time" name="time" id="demo" onclick="fnc();">
                          
                      </div>
 
@@ -52,14 +52,21 @@
         </div>
     </div>
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxT-H4UsXFybXKTsBSCXHk264lEPb3yCd7GGdKWRN004xoMrtPvcX8wxacS7QWmnZg1Gw/exec'
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxTu9umFubZluED8b5_Xdn_DH2UMAvf7ILN8vnRhDpAkl5PAPehlhLTWHAz6svetRBUkg/exec'
         const form = document.forms['model1']
       
         form.addEventListener('submit', e => {
           e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          const formData=new FormData(form)
+          const dataa=Object.fromEntries(formData)
+          console.log(dataa)
+          fetch(scriptURL, { method: 'POST',mode:"no-cors",headers: {
+            'Content-Type':'application/json'
+            
+          }, body: JSON.stringify(dataa)})
             .then(response => alert("Update Done"))
             .catch(error => console.error('Error!', error.message))
+
         })
     </script>
     <script>
