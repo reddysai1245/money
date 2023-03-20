@@ -19,7 +19,7 @@
             <div class="col-8">
                 <h1 style="text-align: center;">Expense Updater</h1>
                 
-                <form name="model1" method="POST">
+                <form name="model1" id="model1" method="POST">
                     <div class="form-group">
                         <label for="bankSelect">Select bank  </label>
                         <select name="bank" id="bankSelect" class="form-control">
@@ -46,7 +46,7 @@
                      </div>
                      <div class="form-group">
                         <label for="timee">time</label>
-                        <input type="text" class="form-control time" name="Time" id="demo" onclick="fnc();">
+                        <input type="text" class="form-control time" name="time" id="demo" onclick="fnc();">
                         
                     </div>
 
@@ -59,12 +59,22 @@
         </div>
     </div>
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxT-H4UsXFybXKTsBSCXHk264lEPb3yCd7GGdKWRN004xoMrtPvcX8wxacS7QWmnZg1Gw/exec'
-        const form = document.forms['model1']
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzQi8QmHveWyvAMXyCtuCVOTjKCCX28hhsrr3LrsaZ28486EmZXOld4V1mpBGsXKAxX/exec'
+        const forms = document.forms['model1']
       
-        form.addEventListener('submit', e => {
+
+      
+      
+        forms.addEventListener('submit', e => {
           e.preventDefault()
-          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          const formData=new FormData(forms)
+          const dataa=Object.fromEntries(formData)
+          console.log(dataa)
+
+          fetch(scriptURL, { method: 'POST',mode:"no-cors",headers: {
+            'Content-Type':'application/json'
+            
+          }, body: JSON.stringify(dataa)})
             .then(response => alert("Update Done"))
             .catch(error => console.error('Error!', error.message))
         })
